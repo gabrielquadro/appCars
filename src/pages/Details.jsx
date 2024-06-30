@@ -7,11 +7,23 @@ const DetailsScreen = ({ route, navigation }) => {
     const [email, setEmail] = useState('');
     const [showNotification, setShowNotification] = useState(false);
 
-    const handleBuyCar = () => {
+    const db = SQLite.openDatabaseSync("leads.db");
 
+    async function handleBuyCar() {
 
-        const userInfo = { email };
-
+        const statement = await db.prepareAsync(
+            "INSERT INTO leads (car_id, user_info) VALUES ($carId, $user_info)"
+        )
+        try {
+            const result = await statement.executeAsync({
+                $carId: car.id,
+                $user_info: email
+            })
+            Alert.alert("Criado com id: " + result.lastInsertRowId.toLocaleString())
+        } catch (error) {
+            throw error;
+        }
+        console.log(email)
 
         setShowNotification(true);
         setTimeout(() => {
@@ -37,7 +49,7 @@ const DetailsScreen = ({ route, navigation }) => {
                 autoCapitalize="none"
                 style={{ borderColor: 'gray', borderWidth: 1, marginVertical: 10, padding: 5 }}
             />
-            <Button title="Eu Quero" onPress={handleBuyCar} />
+            <Button title="Eu Quero" onPress={() => handleBuyCar()} />
 
             {showNotification && (
                 <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'green', padding: 10 }}>

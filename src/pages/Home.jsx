@@ -12,7 +12,6 @@ const Home = ({ navigation }) => {
 
         axios.get('https://wswork.com.br/cars.json')
             .then(response => {
-                console.log(response.data.cars)
                 setCars(response.data.cars)
             })
             .catch(error => console.error(error));
