@@ -1,50 +1,42 @@
-# Welcome to your Expo app 👋
+Aplicativo com o objetivo de mostrar uma lista de carros a partir de https://wswork.com.br/cars.json e ao escolher um carro ser possível clicar em eu quero e salvar as informações do carro selecionado e o email do usuário em uma base e dados sqlite. Além disso, a cada 1 minuto uma rotina é realizada fazendo o envio dos dados do banco local para a api enquanto o aplicativo está em segundo plano.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Tecnlogias utilizadas: React Native, Expo, Sqlite
 
-## Get started
+Instalação:
 
-1. Install dependencies
+- Instalar as dependencias:
 
-   ```bash
-   npm install
-   ```
+  npm install
 
-2. Start the app
+- Iniciar a aplicação:
 
-   ```bash
-    npx expo start
-   ```
+   npx expo start
 
-In the output, you'll find options to open the app in a
+Explicação:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Expo: facilitar o desenvolvimento e a configuração inicial do aplicativo, aproveitando suas ferramentas e bibliotecas integradas.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Foi utlizado o Axios para Requisições HTTP pela sua simplicidade e suporte a promessas, facilitando a interação com a API.
 
-## Get a fresh project
+- Utlização do expo-sqlite para tratar de dados do banco local da aplicação.
 
-When you're ready, run:
+- expo-task-manager para gerenciar o envio periódico de leads, garantindo que o envio aconteça mesmo quando o aplicativo não estiver em uso ativo.
 
-```bash
-npm run reset-project
-```
+- react-navigation para o controle de rotas, nessa aplicação foi usada a stack
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- A rotina é realziada em src/Task/backgroundTask realizando o get dos dados de sqlite e a delete deles após o envio para a api.
 
-## Learn more
+- O tempo de intervalo da rotina pode ser alterado em src/App/index em:  minimumInterval: 60 * 1
 
-To learn more about developing your project with Expo, look at the following resources:
+Tela de início
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+![image](https://github.com/gabrielquadro/appCars/assets/61526044/aedc8d99-121a-4a34-966b-4fa93809c086)
 
-## Join the community
+Tela de detalhes
 
-Join our community of developers creating universal apps.
+![image](https://github.com/gabrielquadro/appCars/assets/61526044/921bc42a-83d0-4156-8d80-fc0be000f66f)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+Tarefa sendo executada em segundo plano a cada 1 minuto
+
+![image](https://github.com/gabrielquadro/appCars/assets/61526044/78babf6b-b284-488e-986d-a3974369aa08)
