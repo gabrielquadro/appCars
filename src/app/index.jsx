@@ -9,7 +9,7 @@ export default function Index() {
         const registerBackgroundTask = async () => {
             try {
                 await BackgroundFetch.registerTaskAsync('SEND_LEADS', {
-                    minimumInterval: 60 * 1, // a cada 1 minuto
+                    minimumInterval: 60 * 1, // a cada 1 minuto faz a tarefa
                     stopOnTerminate: false,
                     startOnBoot: true,
                 });

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity , StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import axios from 'axios';
 import * as SQLite from "expo-sqlite";
 
 const Home = ({ navigation }) => {
+    //pega o banco local
     const db = SQLite.openDatabaseSync("leads.db");
-    const [cars, setCars] = useState([]);
+    const [cars, setCars] = useState([]); //lista dos carros
 
     useEffect(() => {
+        //cria a tabela casp não exista no banco sqlite
         db.execAsync('CREATE TABLE IF NOT EXISTS leads (id INTEGER PRIMARY KEY AUTOINCREMENT, car_id INTEGER, user_info TEXT);')
-
+        //get lista de carros
         axios.get('https://wswork.com.br/cars.json')
             .then(response => {
                 setCars(response.data.cars)

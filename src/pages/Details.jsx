@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 
 const DetailsScreen = ({ route, navigation }) => {
-    const { car } = route.params;
+    const { car } = route.params; //parâmetro recebido de Home
     const [email, setEmail] = useState('');
-    const [showNotification, setShowNotification] = useState(false);
+    const [showNotification, setShowNotification] = useState(false); //notificação de registro salvo
 
     const db = SQLite.openDatabaseSync("leads.db");
 
+    //função save
     async function handleBuyCar() {
 
+        //script de insert em leads
         const statement = await db.prepareAsync(
             "INSERT INTO leads (car_id, user_info) VALUES ($carId, $user_info)"
         )
+        //executa script
         try {
             const result = await statement.executeAsync({
                 $carId: car.id,
@@ -23,7 +26,7 @@ const DetailsScreen = ({ route, navigation }) => {
         } catch (error) {
             throw error;
         }
-
+        //mostra notificação e redireciona pra Home
         setShowNotification(true);
         setTimeout(() => {
             setShowNotification(false);
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: '#f0f0f0', // Cor de fundo suave
+        backgroundColor: '#f0f0f0',
     },
     label: {
         fontSize: 18,
